@@ -78,14 +78,18 @@ async function processRecord(unprocessedRecord, rickshawID) {
   }
 
   const currentTimeStamp=new Date();
+  const GEAR_RATIO= 6
+  const WHEEL_DIAMETER= 19
+
+  const distance= (rickshawData["EV_MCU_Dis"]*WHEEL_DIAMETER)/(GEAR_RATIO*336)
 
   processedData = {
     TimeRecorded: rickshawData["Time"],
     TimeSavedInDatabase: currentTimeStamp,
     RickshawPlate: "",
-    distanceTravelled: rickshawData["EV_MCU_Dis"],
+    distanceTravelled: distance,
     Efficiency: efficiency(),
-    treesSaved: treesSaved(rickshawData["EV_MCU_Dis"]),
+    treesSaved: treesSaved(distance),
     Assigned: "",
     swapsToday: swaps_today,
     swapsThisMonth: swaps_this_month,
