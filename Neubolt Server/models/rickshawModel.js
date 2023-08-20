@@ -87,7 +87,7 @@ async function processRecord(unprocessedRecord, rickshawID) {
     TimeRecorded: rickshawData["Time"],
     TimeSavedInDatabase: currentTimeStamp,
     RickshawPlate: "",
-    distanceTravelled: distance,
+    distanceTravelled: Math.floor(distance),
     Efficiency: efficiency(),
     treesSaved: treesSaved(distance),
     Assigned: "",
