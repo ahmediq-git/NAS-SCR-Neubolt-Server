@@ -85,7 +85,7 @@ async function processRecord(unprocessedRecord, stationID) {
   }
 
   const currentTimeStamp = new Date();
-
+  
   processedData = {
     TimeRecorded: stationData["Time"],
     TimeSavedInDatabase: currentTimeStamp,
@@ -98,58 +98,7 @@ async function processRecord(unprocessedRecord, stationID) {
   return processedData;
 }
 
-// Function to process the unprocessed record and create the desired format
-function processRecord(unprocessedRecord) {
-  const StationData = unprocessedRecord;
-  let processedData = {};
 
-  if (StationData == null) {
-    return processedData;
-  }
-
-  // Process battery slots
-  let batterySlots = {};
-
-  for (let i = 1; i <= 16; i++) {
-    batterySlots[i] = {
-      batteryID: StationData[`S${i}_B_ID`],
-      charge: StationData[`S${i}_B_SoC`],
-      temperature: StationData[`S${i}_B_Temp`],
-      stateOfHealth: StationData[`S${i}_B_SoH`],
-      TimeToFullCharge: timeToFullCharge(),
-    };
-  }
-
-  // Process past swaps (assuming past swap data is available in separate variables)
-  const pastSwaps = {
-    January: 0,
-    February: 0,
-    March: 0,
-    April: 0,
-    May: 0,
-    June: 0,
-    July: 0,
-    August: 0,
-    September: 0,
-    October: 0,
-    November: 0,
-    December: 0,
-  };
-
-  const currentTimeStamp = new Date();
-  // Create the processed data for the Station
-  processedData = {
-    TimeRecorded: StationData["Time"],
-    TimeSavedInDatabase: currentTimeStamp,
-    swapsToday: 0,
-    swapsThisMonth: 0,
-    totalSwaps: 0,
-    pastSwaps,
-    batterySlots,
-  };
-
-  return processedData;
-}
 
 async function updateStation() {
   const currentState = state.getState();
